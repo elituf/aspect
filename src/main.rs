@@ -10,6 +10,6 @@ fn main() {
         args.width,
         args.height,
         args.width / gcd(args.width, args.height),
-        args.height / gcd(args.width, args.height)
-    )
+        args.height / gcd(args.width, args.height),
+    );
 }

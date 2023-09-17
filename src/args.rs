@@ -1,7 +1,7 @@
 use argh::FromArgs;
 
 /// aspect: an aspect ratio calculator
-#[derive(FromArgs, PartialEq)]
+#[derive(FromArgs, PartialEq, Eq)]
 pub struct Args {
     /// the width of your screen or image
     #[argh(option, short = 'w')]
