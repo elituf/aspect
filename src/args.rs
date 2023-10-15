@@ -3,15 +3,15 @@ use argh::FromArgs;
 /// aspect: an aspect ratio calculator
 #[derive(FromArgs, PartialEq, Eq)]
 pub struct Args {
-    /// the width of your screen or image
+    /// the width to calculate with
     #[argh(option, short = 'w')]
     pub width: Option<i32>,
 
-    /// the height of your screen or image
+    /// the height to calculate with
     #[argh(option, short = 'h')]
     pub height: Option<i32>,
 
-    /// image
+    /// get the size and aspect of an image
     #[argh(option, short = 'i')]
     pub image: Option<String>,
 }
