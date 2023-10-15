@@ -1,15 +1,21 @@
+#[allow(unused)]
+use colored::Colorize;
 use num::integer::gcd;
 
 mod args;
 
 // you may ask, "oh why do we need so many functions?!@1!@!>?>/"
 // shut the helll UP
-fn calc_aspect(w: i32, h: i32) -> String {
+fn calc_aspect(w: usize, h: usize) -> String {
     format!("{}:{}", w / gcd(w, h), h / gcd(w, h),)
 }
 
-fn calc_aspect_res(w: i32, h: i32) {
-    println!("the aspect ratio of {w}x{h} is {}", calc_aspect(w, h));
+fn calc_aspect_res(w: usize, h: usize) {
+    println!(
+        "Resolution: {}\nAspect ratio: {}\n",
+        format!("{w}x{h}"),
+        calc_aspect(w, h),
+    );
 }
 
 fn calc_aspect_image(path: String) {
@@ -18,9 +24,10 @@ fn calc_aspect_image(path: String) {
             let w = size.width;
             let h = size.height;
             println!(
-                "the aspect ratio of {path} ({w}x{h}) is {}:{}",
-                w / gcd(w, h),
-                h / gcd(w, h),
+                "File: {}\nResolution: {}\nAspect ratio: {}\n",
+                format!("{path}"),
+                format!("{w}x{h}"),
+                calc_aspect(w, h),
             );
         }
         Err(why) => println!("{why}"),

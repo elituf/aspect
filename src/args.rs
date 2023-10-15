@@ -5,11 +5,11 @@ use argh::FromArgs;
 pub struct Args {
     /// the width to calculate with
     #[argh(option, short = 'w')]
-    pub width: Option<i32>,
+    pub width: Option<usize>,
 
     /// the height to calculate with
     #[argh(option, short = 'h')]
-    pub height: Option<i32>,
+    pub height: Option<usize>,
 
     /// get the size and aspect of an image
     #[argh(option, short = 'i')]
