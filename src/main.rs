@@ -1,4 +1,5 @@
 use num::integer::gcd;
+use std::path::PathBuf;
 
 mod args;
 
@@ -6,13 +7,15 @@ fn calc_aspect(w: usize, h: usize) -> String {
     format!("{}:{}", w / gcd(w, h), h / gcd(w, h),)
 }
 
-fn calc_aspect_image(path: String) {
+fn calc_aspect_image(path: PathBuf) {
     match imagesize::size(&path) {
         Ok(size) => {
             let w = size.width;
             let h = size.height;
+            let working_path = std::env::current_dir().expect("could not get working path");
             println!(
-                "File: {path}\nResolution: {w}x{h}\nAspect ratio: {}\n",
+                "File: {:?}\nResolution: {w}x{h}\nAspect ratio: {}\n",
+                working_path.join(path),
                 calc_aspect(w, h),
             );
         }

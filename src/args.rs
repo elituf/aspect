@@ -1,4 +1,5 @@
 use argh::FromArgs;
+use std::path::PathBuf;
 
 /// aspect: an aspect ratio calculator
 #[derive(FromArgs, PartialEq, Eq)]
@@ -13,5 +14,5 @@ pub struct Args {
 
     /// get the size and aspect of an image
     #[argh(option, short = 'i')]
-    pub image: Option<String>,
+    pub image: Option<PathBuf>,
 }
