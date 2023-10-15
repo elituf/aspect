@@ -5,9 +5,13 @@ use argh::FromArgs;
 pub struct Args {
     /// the width of your screen or image
     #[argh(option, short = 'w')]
-    pub width: i32,
+    pub width: Option<i32>,
 
     /// the height of your screen or image
     #[argh(option, short = 'h')]
-    pub height: i32,
+    pub height: Option<i32>,
+
+    /// image
+    #[argh(option, short = 'i')]
+    pub image: Option<String>,
 }
