@@ -13,11 +13,7 @@ fn calc_aspect_image(path: PathBuf) {
             let w = size.width;
             let h = size.height;
             let working_path = std::env::current_dir().expect("could not get working path");
-            println!(
-                "File: {}\nResolution: {w}x{h}\nAspect ratio: {}\n",
-                working_path.join(path).display(),
-                calc_aspect(w, h),
-            );
+            println!("File: {}\nResolution: {w}x{h}\nAspect ratio: {}\n", working_path.join(path).display(), calc_aspect(w, h),);
         }
         Err(why) => println!("{why}"),
     }
