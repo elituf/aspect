@@ -12,11 +12,9 @@ fn calc_aspect_image(path: PathBuf) {
         Ok(size) => {
             let w = size.width;
             let h = size.height;
-            let working_path = std::env::current_dir().expect("could not get working path");
             println!(
                 "File: {}\nResolution: {w}x{h}\nAspect ratio: {}\n",
-                // this is so fucked up but i'm too lazy right now to find a better way
-                working_path.join(path.canonicalize().unwrap()).to_string_lossy().trim_start_matches(r"\\?\"),
+                path.canonicalize().unwrap().to_string_lossy().trim_start_matches(r"\\?\"),
                 calc_aspect(w, h),
             );
         }
