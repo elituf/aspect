@@ -1,18 +1,19 @@
-use argh::FromArgs;
+use clap::Parser;
 use std::path::PathBuf;
 
 /// aspect: an aspect ratio calculator
-#[derive(FromArgs, PartialEq, Eq)]
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None, arg_required_else_help = true)]
 pub struct Args {
-    /// the width to calculate with
-    #[argh(option, short = 'w')]
+    /// specify width to use for aspect ratio calculation
+    #[arg(short = 'W', long)]
     pub width: Option<usize>,
 
-    /// the height to calculate with
-    #[argh(option, short = 'h')]
+    /// specify height to use for aspect ratio calculation
+    #[arg(short = 'H', long)]
     pub height: Option<usize>,
 
-    /// get the size and aspect of an image
-    #[argh(option, short = 'i')]
+    /// get the dimensions and aspect ratio of an image
+    #[arg(short, long)]
     pub image: Option<PathBuf>,
 }
