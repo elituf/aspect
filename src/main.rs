@@ -12,15 +12,13 @@ fn calc_aspect(w: usize, h: usize) -> String {
 
 fn calc_aspect_image(path: &PathBuf) -> Result<String> {
     match imagesize::size(path) {
-        Ok(size) => {
-            let w = size.width;
-            let h = size.height;
-            Ok(format!(
-                "File: {}\nResolution: {w}x{h}\nAspect ratio: {}",
-                path.canonicalize()?.to_string_lossy().trim_start_matches(r"\\?\"),
-                calc_aspect(w, h),
-            ))
-        }
+        Ok(size) => Ok(format!(
+            "File: {}\nResolution: {}x{}\nAspect ratio: {}",
+            path.canonicalize()?.to_string_lossy().trim_start_matches(r"\\?\"),
+            size.width,
+            size.height,
+            calc_aspect(size.width, size.height),
+        )),
         Err(why) => Err(why.into()),
     }
 }
