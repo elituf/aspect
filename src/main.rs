@@ -1,13 +1,14 @@
-use crate::args::Args;
+mod args;
+mod gcd;
+
+use args::Args;
 use clap::Parser;
 use eyre::Result;
-use gcd::Gcd;
+use gcd::gcd;
 use std::path::PathBuf;
 
-mod args;
-
 fn calc_aspect(w: usize, h: usize) -> String {
-    format!("{}:{}", w / w.gcd(h), h / w.gcd(h),)
+    format!("{}:{}", w / gcd(w, h), h / gcd(w, h),)
 }
 
 fn calc_aspect_image(path: &PathBuf) -> Result<String> {
