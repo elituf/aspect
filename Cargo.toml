@@ -1,10 +1,10 @@
 [package]
 name = "aspect"
-version = "1.0.1"
+version = "1.1.0"
 edition = "2021"
+license = "BSL-1.0"
 
 [dependencies]
 clap = { version = "4.4.7", features = ["derive"] }
 eyre = "0.6.8"
-gcd = "2.3.0"
 imagesize = "0.12.0"
