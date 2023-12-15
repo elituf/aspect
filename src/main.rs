@@ -17,7 +17,14 @@ fn main() -> Result<()> {
         println!(); // print an empty line should the user use all the arguments
     }
     if let Some(img) = args.image {
-        println!("{}", calc_image_aspect(&img)?);
+        let image = calc_image_aspect(&img)?;
+        println!(
+            "File: {}\nResolution: {}x{}\nAspect ratio: {}",
+            image.path.display(),
+            image.resolution.width,
+            image.resolution.height,
+            image.aspect
+        );
     }
 
     Ok(())

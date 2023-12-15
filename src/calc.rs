@@ -1,19 +1,39 @@
 use crate::gcd::gcd;
 use eyre::Result;
 use imagesize::ImageSize;
-use std::path::PathBuf;
+use std::{fmt, path::PathBuf};
 
-pub fn calc_aspect(w: usize, h: usize) -> String {
-    format!("{}:{}", w / gcd(w, h), h / gcd(w, h))
+pub struct Aspect {
+    pub width: usize,
+    pub height: usize,
 }
 
-pub fn calc_image_aspect(path: &PathBuf) -> Result<String> {
+pub struct Image {
+    pub path: PathBuf,
+    pub resolution: ImageSize,
+    pub aspect: Aspect,
+}
+
+impl fmt::Display for Aspect {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}:{}", self.width, self.height)
+    }
+}
+
+pub fn calc_aspect(w: usize, h: usize) -> Aspect {
+    Aspect {
+        width: w / gcd(w, h),
+        height: h / gcd(w, h),
+    }
+}
+
+pub fn calc_image_aspect(path: &PathBuf) -> Result<Image> {
     match imagesize::size(path) {
-        Ok(ImageSize { width, height }) => Ok(format!(
-            "File: {}\nResolution: {width}x{height}\nAspect ratio: {}",
-            path.display(),
-            calc_aspect(width, height),
-        )),
+        Ok(resolution) => Ok(Image {
+            path: path.to_path_buf(),
+            resolution,
+            aspect: calc_aspect(resolution.width, resolution.height),
+        }),
         Err(why) => Err(why.into()),
     }
 }
