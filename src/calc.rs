@@ -1,6 +1,5 @@
 use crate::gcd::gcd;
-use eyre::Result;
-use imagesize::ImageSize;
+use imagesize::{ImageError, ImageSize};
 use std::{fmt, path::PathBuf};
 
 pub struct Aspect {
@@ -27,13 +26,13 @@ pub fn calc_aspect(w: usize, h: usize) -> Aspect {
     }
 }
 
-pub fn calc_image_aspect(path: &PathBuf) -> Result<Image> {
+pub fn calc_image_aspect(path: &PathBuf) -> Result<Image, ImageError> {
     match imagesize::size(path) {
         Ok(resolution) => Ok(Image {
             path: path.to_path_buf(),
             resolution,
             aspect: calc_aspect(resolution.width, resolution.height),
         }),
-        Err(why) => Err(why.into()),
+        Err(why) => Err(why),
     }
 }
