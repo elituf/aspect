@@ -19,19 +19,19 @@ impl fmt::Display for Aspect {
     }
 }
 
-pub fn calc_aspect(w: usize, h: usize) -> Aspect {
+pub fn aspect(w: usize, h: usize) -> Aspect {
     Aspect {
         width: w / gcd(w, h),
         height: h / gcd(w, h),
     }
 }
 
-pub fn calc_image_aspect(path: &PathBuf) -> Result<Image, ImageError> {
+pub fn image_aspect(path: &PathBuf) -> Result<Image, ImageError> {
     match imagesize::size(path) {
         Ok(resolution) => Ok(Image {
-            path: path.to_path_buf(),
+            path: path.clone(),
             resolution,
-            aspect: calc_aspect(resolution.width, resolution.height),
+            aspect: aspect(resolution.width, resolution.height),
         }),
         Err(why) => Err(why),
     }
